@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.DropMode;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Home extends JFrame {
 
@@ -25,6 +27,7 @@ public class Home extends JFrame {
 	private JLabel lblText;
 	private JTextField textField;
 	private JButton btnCevir;
+	private JTextPane textPane;
 
 	/**
 	 * Launch the application.
@@ -47,8 +50,9 @@ public class Home extends JFrame {
 	 */
 	public Home() {
 		setBackground(new Color(199, 242, 246));
+		setTitle("Easy Translate");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(450, 200, 450, 300);
+		setBounds(450, 200, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(228, 245, 247));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,6 +77,34 @@ public class Home extends JFrame {
 		contentPane.add(textField, gbc_textField);
 		
 		btnCevir = new JButton("Çevir");
+		btnCevir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Request request = new Request();
+				request.homePage ="https://tureng.com/en/turkish-english";
+				request.data = textField.getText();
+				request.createLink(request.homePage, request.data);
+								
+				JFrame newFrame = new JFrame();
+				newFrame.setTitle("Easy Translate");
+				newFrame.setBounds(650, 400, 500, 250);
+				newFrame.setLayout(new GridBagLayout());
+				
+				textPane = new JTextPane();
+				GridBagConstraints gbc_textPane = new GridBagConstraints();
+				gbc_textPane.insets = new Insets(0, 0, 5, 5);
+				gbc_textPane.fill = GridBagConstraints.BOTH;
+				gbc_textPane.gridx = 4;
+				gbc_textPane.gridy = 6;
+				contentPane.add(textPane, gbc_textPane);
+				
+				newFrame.add(textPane);
+				
+				newFrame.setVisible(true);
+			}
+		});
+		
 		btnCevir.setForeground(new Color(255, 255, 224));
 		btnCevir.setBackground(new Color(0, 0, 153));
 		btnCevir.setFont(new Font("Laksaman", Font.BOLD, 12));
