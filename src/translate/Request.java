@@ -7,10 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 public class Request {
-	
-	public String homePage;
-	public String data;
-	
+
 	private String englishText;
 	private String turkishText;
 	public String getEnglishText() {
@@ -26,16 +23,37 @@ public class Request {
 		this.turkishText = turkishText;
 	}
 	
-	public String createLink(String url, String args) {
-		String link = homePage;
-		if (args != null && args.length() > 0) {
-			link += "/" + args;
+	// create a link
+	public String createLink() {
+		String link = "https://tureng.com/en/turkish-english";
+		
+		// join home page and user's data
+		if (englishText != null && englishText.length() > 0) {
+			link += "/" + englishText;
 		}
+		
 		return link;
 	}
-	
+
+	// translate user's data
+	public void translate() {
+		
+		String link = createLink();
+		
+		try {
+			// get html data
+			Document doc = Jsoup.connect(link).get();
+			// parse result translated text
+			Element result = doc.select("td.tr.ts a").first();
+			// set Turkish text
+			turkishText = result.text();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
-	
-	
-	
-	
+
+
+
+

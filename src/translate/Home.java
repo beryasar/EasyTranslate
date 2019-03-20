@@ -52,7 +52,7 @@ public class Home extends JFrame {
 		setBackground(new Color(199, 242, 246));
 		setTitle("Easy Translate");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(450, 200, 500, 300);
+		setBounds(400, 150, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(228, 245, 247));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,19 +81,22 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				String englishText = textField.getText();
+				
 				Request request = new Request();
-				request.homePage ="https://tureng.com/en/turkish-english";
-				request.data = textField.getText();
-				request.createLink(request.homePage, request.data);
+				request.setEnglishText(englishText);
+				request.translate();
+				String translatedText = request.getTurkishText();
 								
 				JFrame newFrame = new JFrame();
 				newFrame.setTitle("Easy Translate");
-				newFrame.setBounds(650, 400, 500, 250);
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				newFrame.setBounds(650, 370, 300, 150);
 				newFrame.setLayout(new GridBagLayout());
 				
 				textPane = new JTextPane();
+				textPane.setText(translatedText);
 				GridBagConstraints gbc_textPane = new GridBagConstraints();
-				gbc_textPane.insets = new Insets(0, 0, 5, 5);
 				gbc_textPane.fill = GridBagConstraints.BOTH;
 				gbc_textPane.gridx = 4;
 				gbc_textPane.gridy = 6;
