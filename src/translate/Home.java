@@ -1,13 +1,16 @@
+/**
+ * This is a simple translation app.
+ * @author Busra Nur Eryasar
+ */
+
 package translate;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
-import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
@@ -16,8 +19,6 @@ import java.awt.Insets;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -27,7 +28,6 @@ public class Home extends JFrame {
 	private JLabel lblText;
 	private JTextField textField;
 	private JButton btnCevir;
-	private JPanel contentPaneNew;
 	private JTextPane textPane;
 
 	/**

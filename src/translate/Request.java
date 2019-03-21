@@ -1,3 +1,8 @@
+/**
+ * Translate text from English to Turkish. 
+ * @author Busra Nur Eryasar
+ */
+
 package translate;
 
 import java.io.IOException;
@@ -5,6 +10,7 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 
 public class Request {
 
@@ -23,11 +29,13 @@ public class Request {
 		this.turkishText = turkishText;
 	}
 	
-	// create a link
+	/**
+	 * Create a link
+	 */
 	public String createLink() {
 		String link = "https://tureng.com/en/turkish-english";
 		
-		// join home page and user's data
+		/* Join home page and user's data. */
 		if (englishText != null && englishText.length() > 0) {
 			link += "/" + englishText;
 		}
@@ -35,21 +43,24 @@ public class Request {
 		return link;
 	}
 
-	// translate user's data
+	/**
+	 * Translate user's text.
+	 */
 	public void translate() {
 		
 		String link = createLink();
 		
 		try {
-			// get html data
+			/* Get html data. */
 			Document doc = Jsoup.connect(link).get();
-			// parse result translated text
+			/* Parse translated text. */
 			Element result = doc.select("td.tr.ts a").first();
 			
 			if (result != null) {
-				// set Turkish text
+				/* Set Turkish text. */
 				turkishText = result.text();
 			} else {
+				/* Parse other text's suggestion list. */
 				Element option = doc.select("ul.suggestion-list li").first();
 				turkishText = "Bunu mu demek istediniz: \n\n" + option.text();
 			}
