@@ -45,8 +45,15 @@ public class Request {
 			Document doc = Jsoup.connect(link).get();
 			// parse result translated text
 			Element result = doc.select("td.tr.ts a").first();
-			// set Turkish text
-			turkishText = result.text();
+			
+			if (result != null) {
+				// set Turkish text
+				turkishText = result.text();
+			} else {
+				Element option = doc.select("ul.suggestion-list li").first();
+				turkishText = "Bunu mu demek istediniz: \n\n" + option.text();
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

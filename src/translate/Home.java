@@ -27,6 +27,7 @@ public class Home extends JFrame {
 	private JLabel lblText;
 	private JTextField textField;
 	private JButton btnCevir;
+	private JPanel contentPaneNew;
 	private JTextPane textPane;
 
 	/**
@@ -87,24 +88,24 @@ public class Home extends JFrame {
 				request.setEnglishText(englishText);
 				request.translate();
 				String translatedText = request.getTurkishText();
-								
+												
 				JFrame newFrame = new JFrame();
 				newFrame.setTitle("Easy Translate");
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				newFrame.setBounds(650, 370, 300, 150);
+				newFrame.setBounds(650, 370, 500, 300); 
 				newFrame.setLayout(new GridBagLayout());
 				
 				textPane = new JTextPane();
+				textPane.setBackground(new Color(238, 238, 238));
 				textPane.setText(translatedText);
+				textPane.setFont(new Font("Laksaman", Font.PLAIN, 12));
 				GridBagConstraints gbc_textPane = new GridBagConstraints();
 				gbc_textPane.fill = GridBagConstraints.BOTH;
-				gbc_textPane.gridx = 4;
-				gbc_textPane.gridy = 6;
-				contentPane.add(textPane, gbc_textPane);
-				
+				gbc_textPane.gridx = 3;
+				gbc_textPane.gridy = 1;
+			
 				newFrame.add(textPane);
-				
-				newFrame.setVisible(true);
+				newFrame.setVisible(true);   
 			}
 		});
 		
